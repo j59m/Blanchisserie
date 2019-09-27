@@ -6,7 +6,7 @@ namespace Blanchisserie
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IHM.Instance.MenuPrincipal();
         }
     }
 }
