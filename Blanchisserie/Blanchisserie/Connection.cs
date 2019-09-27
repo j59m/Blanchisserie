@@ -7,25 +7,12 @@ namespace Blanchisserie
 {
     class Connection
      {
-        private static Connection instance = null;
+        private static SqlConnection instance = null;
         private static object _lock = new object();
-        private SqlConnection connection;
         private SqlCommand command;
         private SqlDataReader reader;
 
-        //    public static Connection Instance
-        //    {
-        //        get
-        //        {
-        //            lock (_lock)
-        //            {
-        //                if (instance == null)
-        //                    instance = new Connection();
-        //                return instance;
-        //            }
-        //        }
-        //    }
-
+        
         public static SqlConnection Instance
     {
         get
@@ -45,7 +32,7 @@ namespace Blanchisserie
 
         private Connection()
         {
-            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\Blanchisserie;Integrated Security=True");
+           
         }
 
 

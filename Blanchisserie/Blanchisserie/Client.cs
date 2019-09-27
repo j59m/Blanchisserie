@@ -10,38 +10,37 @@ namespace Blanchisserie
     {
         private int id;
         private string nomEntreprise;
-        private string rue;
-        private string ville;
-        private string telephone;
-        private string mail;
-        private static SqlConnection Connection Instance;
+        private string rueEntreprise;
+        private string villeEntreprise;
+        private string telephoneEntreprise;
+        private string mailEntreprise;
+        //private static SqlConnection Connection Instance;
         private static SqlCommand command;
         private static SqlDataReader reader;
 
         public int Id { get => id; set => id = value; }
         public string NomEntreprise { get => nomEntreprise; set => nomEntreprise = value; }
-        public string Rue { get => rue; set => rue = value; }
-        public string Ville { get => ville; set => ville = value; }
-        public string Telephone { get => telephone; set => telephone = value; }
-        public string Mail { get => mail; set => mail = value; }
-
+        public string RueEntreprise { get => rueEntreprise; set => rueEntreprise = value; }
+        public string VilleEntreprise { get => villeEntreprise; set => villeEntreprise = value; }
+        public string TelephoneEntreprise { get => telephoneEntreprise; set => telephoneEntreprise = value; }
+        public string MailEntreprise { get => mailEntreprise; set => mailEntreprise = value; }
 
         public Client()
         { }
 
         public Client(int id)
         {
-            command = new SqlCommand("SELECT nomEntreprise, rue, ville, telephone, mail from Client where id = @id", Connection.instance);
+            command = new SqlCommand("SELECT nomEntreprise, rueEntreprise, villeEntreprise, telephoneEntreprise, mailEntreprise from Client where id = @id", Connection.Instance);
             command.Parameters.Add(new SqlParameter("@id", id));
             Connection.Instance.Open();
             reader = command.ExecuteReader();
             if(reader.Read())
             {
                 NomEntreprise = reader.GetString(0);
-                Rue = reader.GetString(1);
-                Ville = reader.GetString(2);
-                Telephone = reader.GetString(3);
-                Mail = reader.GetString(4);
+                RueEntreprise = reader.GetString(1);
+                VilleEntreprise = reader.GetString(2);
+                TelephoneEntreprise = reader.GetString(3);
+                MailEntreprise = reader.GetString(4);
                 Id = id;
             }
             command.Dispose();
@@ -50,12 +49,12 @@ namespace Blanchisserie
 
         public void AjouterClient()
         {
-            command = new SqlCommand("INSERT INTO Client (nomEntreprise, rue, ville, telephone, mail) OUTPUT INSERTED.ID values(@nomEntreprise, @rue, @ville, @telephone, @mail) ", connections);
+            command = new SqlCommand("INSERT INTO Client (nomEntreprise, rueEntreprise, villeEntreprise, telephoneEntreprise, mailEntreprise) OUTPUT INSERTED.ID values(@nomEntreprise, @rueEntreprise, @villeEntreprise, @telephoneEntreprise, @mailEntreprise) ", Connection.Instance);
             command.Parameters.Add(new SqlParameter("@nomEntreprise", nomEntreprise));
-            command.Parameters.Add(new SqlParameter("@rue", rue));
-            command.Parameters.Add(new SqlParameter("@ville", ville));
-            command.Parameters.Add(new SqlParameter("@telephone", telephone));
-            command.Parameters.Add(new SqlParameter("@mail", mail));
+            command.Parameters.Add(new SqlParameter("@rueEntreprise", RueEntreprise));
+            command.Parameters.Add(new SqlParameter("@villeEntreprise", VilleEntreprise));
+            command.Parameters.Add(new SqlParameter("@telephoneEntreprise", TelephoneEntreprise));
+            command.Parameters.Add(new SqlParameter("@mailEntreprise", MailEntreprise));
             Connection.Instance.Open();
             Id = (int)command.ExecuteScalar();
             command.Dispose();

@@ -22,6 +22,9 @@ namespace Blanchisserie
             }
         }
 
+        private IHM()
+        { }
+
         public  void MenuPrincipal()
         {
             Console.WriteLine("---------MENU PRINCIPAL----------");
@@ -87,10 +90,10 @@ namespace Blanchisserie
                         Client c = new Client
                         {
                             NomEntreprise = n,
-                            Rue = r,
-                            Ville = v,
-                            Telephone = t,
-                            Mail = m
+                            RueEntreprise = r,
+                            VilleEntreprise = v,
+                            TelephoneEntreprise = t,
+                            MailEntreprise = m
                         };
                         c.AjouterClient();
                         break;
